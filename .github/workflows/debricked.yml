@@ -1,14 +1,39 @@
-name: Debricked scan
+name: Debricked SCA
 
-on: [push, workflow_dispatch]
+on: [push]
 
 jobs:
-  vulnerabilities-scan:
+  debricked:
     runs-on: ubuntu-latest
 
+    container:
+      image: debricked/cli:latest-resolution-debian
+      # Choosing the right container image for your scan can be important. 
+      # All Debricked images are here: https://hub.docker.com/r/debricked/cli
+
+      # Resolution images (contains "resolution" in tag) are bigger, but comes with a lot of pre-installed package managers: 
+      # Here are the dockerfiles: https://github.com/debricked/cli/tree/main/build/docker
+      # This is the easiest way to integrate, but it may be better 
+      # to run debricked scans in you build images. 
+
+      # You can choose between debian and alpine images, where we do alpine by default. 
+      # We recommend to use debian images for scanning Python projects, as the scanner will not 
+      # need to compile some common c-based dependencies like pandas. 
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: debricked/actions/callgraph@v4
-      - uses: debricked/actions@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Here I make two separate scans with debricked in different parts of the repo
+      # This will create two separate repos in the debricked tool, and can be managed
+      # with different policies etc. 
+      # You can also split these out to two separate actions to make the results easier to consume visually. 
+      - name: Run Scan
+        run: |
+          run: |
+          debricked scan api/ -r api-service
+          debricked scan web/ -r web-service
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
+        
+        
