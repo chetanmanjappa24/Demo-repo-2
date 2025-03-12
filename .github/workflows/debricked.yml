@@ -29,6 +29,7 @@ jobs:
       # with different policies etc. 
       # You can also split these out to two separate actions to make the results easier to consume visually. 
       - name: Run Scan
+        if: success() || failure()
         run: |
           run: |
           debricked scan src/ -r api-service
