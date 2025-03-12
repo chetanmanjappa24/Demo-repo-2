@@ -31,7 +31,7 @@ jobs:
       - name: Run Scan
         run: |
           run: |
-          debricked scan api/ -r api-service
+          debricked scan src/ -r api-service
           debricked scan web/ -r web-service
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
