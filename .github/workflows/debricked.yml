@@ -28,13 +28,15 @@ jobs:
       # This will create two separate repos in the debricked tool, and can be managed
       # with different policies etc. 
       # You can also split these out to two separate actions to make the results easier to consume visually. 
-      - name: Run Scan
-        if: success() || failure()
+      - name: Scan web service
         run: |
-          run: |
-          debricked scan src/ -r api-service
           debricked scan web/ -r web-service
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
-        
+      - name: Scan api service
+        if: success() || failure() ## Run this scan even though the previous scan resulted in a pipeline failure
+        run: |
+          debricked scan src/ -r api-service
+        env:
+          DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
         
