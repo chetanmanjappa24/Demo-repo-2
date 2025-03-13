@@ -24,7 +24,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Here I make two separate scans with debricked in different parts of the repo
+      - name: Scan everything
+        run: |
+          debricked scan
+        env:
+          DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
+          
+      # Here I make demonstrate how to do two separate scans with debricked in different parts of the repo
       # This will create two separate repos in the debricked tool, and can be managed
       # with different policies etc. 
       # You can also split these out to two separate actions to make the results easier to consume visually. 
