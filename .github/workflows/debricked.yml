@@ -35,6 +35,7 @@ jobs:
       # with different policies etc. 
       # You can also split these out to two separate actions to make the results easier to consume visually. 
       - name: Scan web service
+        if: success() || failure() ## Run this scan even though the previous scan resulted in a pipeline failure
         run: |
           debricked scan web/ -r web-service
         env:
