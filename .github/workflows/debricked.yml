@@ -46,4 +46,18 @@ jobs:
           debricked scan src/ -r api-service
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
-        
+
+  vulnerabilities-scan-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: debricked/actions/callgraph@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sbom-report
+          path: debricked-call-graph.java
+      - uses: debricked/actions@v4
+        env:
+          DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN_STAGING }}
+          DEBRICKED_URI: 'https://review-7335-postg-rt1bzk.review.debricked.dev'
