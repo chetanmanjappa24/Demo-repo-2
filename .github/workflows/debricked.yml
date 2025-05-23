@@ -47,6 +47,22 @@ jobs:
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
 
+  vulnerabilities-scan-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: debricked/actions/callgraph@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: call graph file
+          path: debricked-call-graph.java
+      - uses: debricked/actions@v4
+        env:
+          DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN_STAGING }}
+          DEBRICKED_URI: 'https://staging.debricked.com'
+
+
   vulnerabilities-scan-review:
     runs-on: ubuntu-latest
 
