@@ -27,7 +27,7 @@ jobs:
         uses: debricked/actions/callgraph@v4
       - name: Scan everything
         run: |
-          debricked scan
+          debricked scan --no-fingerprint=true
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN }}
           
