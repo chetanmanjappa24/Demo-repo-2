@@ -1,17 +1,24 @@
 import org.apache.logging.log4j.core.lookup.StrLookup;
 import org.apache.logging.log4j.core.lookup.Interpolator;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-public class Log4jReachabilityExample {
+import java.util.ArrayList;
+import java.util.List;
 
-    public static void main(String[] args) {
-        StrLookup lookup = new StrLookup() {
-            public String lookup(String key) { return "value"; }
-            public String lookup(org.apache.logging.log4j.core.LogEvent event, String key) { return "value"; }
-        };
+@RestController
+public class Log4jReachabilityController {
 
-        // Directly call the vulnerable constructor
-        Interpolator interpolator = new Interpolator(lookup, java.util.Collections.emptyList());
+    static class DummyLookup implements StrLookup {
+        @Override
+        public String lookup(String key) { return "value"; }
+        @Override
+        public String lookup(org.apache.logging.log4j.core.LogEvent event, String key) { return "value"; }
+    }
 
-        System.out.println("Interpolator created");
+    @GetMapping("/test-log4j")
+    public String testLog4j() {
+        Interpolator interpolator = new Interpolator(new DummyLookup(), new ArrayList<>());
+        return "Interpolator created";
     }
 }
