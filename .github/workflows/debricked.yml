@@ -77,4 +77,4 @@ jobs:
       - uses: debricked/actions@v4
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN_REVIEW }}
-          DEBRICKED_URI: 'https://review-0000-test-9bydts.review.debricked.dev'
+          DEBRICKED_URI: 'https://review-7621-prism-odpwe0.review.debricked.dev'
