@@ -77,4 +77,4 @@ jobs:
       - uses: debricked/actions@v4
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN_STAGING }}
-          DEBRICKED_URI: 'https://review-7218-initi-tde7g8.review.debricked.dev'
+          DEBRICKED_URI: 'https://review-7817-revie-fhyo2b.review.debricked.dev'
