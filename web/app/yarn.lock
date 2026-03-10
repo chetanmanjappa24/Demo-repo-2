@@ -1799,6 +1799,5 @@ yargs@~3.10.0:
   integrity sha512-QFzUah88GAGy9lyDKGBqZdkYApt63rCXYBGYnEP4xDJPXNqXXnBDACnbrXnViV6jRSqAePwrATi2i8mfYm4L1A==
   dependencies:
     camelcase "^1.0.2"
-    cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
