@@ -77,4 +77,4 @@ jobs:
       - uses: debricked/actions@v4
         env:
           DEBRICKED_TOKEN: ${{ secrets.DEBRICKED_TOKEN_STAGING }}
-          DEBRICKED_URI: 'https://review-7813-optim-rpifpa.review.debricked.dev'
+          DEBRICKED_URI: 'https://review-7805-remed-sq9bxk.review.debricked.dev'
